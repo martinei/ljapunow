@@ -1,44 +1,41 @@
-imageData = null
+function renderer(element) {
+    var that=this;
+    var x0 = 3;
+    var y0 = 3;
+    var x1 = 4;
+    var y1 = 4;
 
-x0 = 3;
-y0 = 3   ;
-x1 = 4;
-y1 = 4;
+	var context = element.getContext("2d");
+	var width = element.width;
+	var height = element.height;
 
-
-	element = document.getElementById("myCanvas");
-	c = element.getContext("2d");
-	width = element.width;
-	height = element.height;
- clicked()
-
-function renderImage(context) {
-		if (imageData == null) {	
-		imageData = context.createImageData(width, height);
-		}
-		pos = 0; // index position into imagedata array
- 	for (y = 0; y < height; y++) {
+    // privileged function
+    this.renderImage = function () {
+		var imageData = context.createImageData(width, height);
+		var pos = 0; // index position into imagedata array
+ 	    for (y = 0; y < height; y++) {
 			for (x = 0; x < width; x++) {
 				// calculate sine based on distance
-				realx = x0 + x*(x1-x0)/width;
-				realy = y0 + y*(y1-y0)/height;
+				var realx = x0 + x*(x1-x0)/width;
+				var realy = y0 + y*(y1-y0)/height;
 
-             sum = 0
-             value = 0.5
-             itercount = 200
-             for (i = 0; i < itercount;i++) {
-                 if (i % 2 == 0) {
-                     r = realx
-                 } else r = realy
-                 value = value * r* (1-value)
-                 sum +=  Math.log (Math.abs(r*(1-2*value)))
-             }
+                var sum = 0
+                var value = 0.5
+                var itercount = 200
+                for (i = 0; i < itercount;i++) {
+                    if (i % 2 == 0) {
+                        r = realx
+                    } else r = realy
+                    value = value * r* (1-value)
+                    sum +=  Math.log (Math.abs(r*(1-2*value)))
+                }
 
-             sum = sum /itercount
-             if (sum > 0){r = 0 } else {r = -sum*500}
+                sum = sum /itercount
+                var r
+                if (sum > 0){r = 0 } else {r = -sum*500}
 
-				g = r*2
-				b = r
+				var g = r*2
+				var b = r
 
 				// set red, green, blue, and alpha:
 				imageData.data[pos++] = Math.max(0,Math.min(255, r));
@@ -49,11 +46,16 @@ function renderImage(context) {
 		}
 
 		 // copy the image data back onto the canvas
- 	c.putImageData(imageData, 0, 0); // at coords 0,
+ 	context.putImageData(imageData, 0, 0); // at coords 0,
 	}
+}
 
- 
- function clicked() {
-		renderImage(c)
-	}
+ 	
+ 	element = document.getElementById("myCanvas");
+    myrenderer = new renderer(element);
+    
+function clicked() {
+	myrenderer.renderImage()
+}
+
 
