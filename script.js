@@ -1,4 +1,4 @@
-function renderer(element) {
+function Renderer(element) {
 	var that=this;
 	var x0 = 3;
 	var y0 = 3;
@@ -52,7 +52,7 @@ function renderer(element) {
 
 
 	element = document.getElementById("myCanvas");
-	myrenderer = new renderer(element);
+	myrenderer = new Renderer(element);
 
 function clicked() {
 	myrenderer.renderImage()
