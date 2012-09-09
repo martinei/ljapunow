@@ -1,5 +1,4 @@
 function Renderer(element) {
-	var that=this;
 	var x0 = 3;
 	var y0 = 3;
 	var x1 = 4;
