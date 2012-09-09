@@ -21,23 +21,23 @@ function Renderer(element) {
 				var realx = x0 + x*(x1-x0)/width;
 				var realy = y0 + y*(y1-y0)/height;
 
-				var sum = 0
-				var value = 0.5
-				var itercount = 200
+				var sum = 0;
+				var value = 0.5;
+				var itercount = 200;
 				var i, r;
 				for (i = 0; i < itercount;i++) {
 					if (i % 2 == 0) {
-						r = realx
-					} else r = realy
-					value = value * r* (1-value)
-					sum +=  Math.log (Math.abs(r*(1-2*value)))
+						r = realx;
+					} else r = realy;
+					value = value * r* (1-value);
+					sum +=  Math.log (Math.abs(r*(1-2*value)));
 				}
 
-				sum = sum /itercount
-				if (sum > 0){r = 0 } else {r = -sum*500}
+				sum = sum /itercount;
+				if (sum > 0){r = 0; } else {r = -sum*500;}
 
-				var g = r*2
-				var b = r
+				var g = r*2;
+				var b = r;
 
 				// set red, green, blue, and alpha:
 				imageData.data[pos++] = Math.max(0,Math.min(255, r));
@@ -49,13 +49,13 @@ function Renderer(element) {
 
 		// copy the image data back onto the canvas
 	context.putImageData(imageData, 0, 0); // at coords 0,
-	}
+	};
 }
 
 
-	element = document.getElementById("myCanvas");
-	myrenderer = new Renderer(element);
+	var element = document.getElementById("myCanvas");
+	var myrenderer = new Renderer(element);
 
 function clicked() {
-	myrenderer.renderImage()
+	myrenderer.renderImage();
 }
