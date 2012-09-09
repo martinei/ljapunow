@@ -1,3 +1,5 @@
+/*jslint vars: true, plusplus: true */
+
 function Renderer(element) {
 	var x0 = 3;
 	var y0 = 3;
@@ -12,6 +14,7 @@ function Renderer(element) {
 	this.renderImage = function () {
 		var imageData = context.createImageData(width, height);
 		var pos = 0; // index position into imagedata array
+		var x, y;
 		for (y = 0; y < height; y++) {
 			for (x = 0; x < width; x++) {
 				// calculate sine based on distance
@@ -21,6 +24,7 @@ function Renderer(element) {
 				var sum = 0
 				var value = 0.5
 				var itercount = 200
+				var i, r;
 				for (i = 0; i < itercount;i++) {
 					if (i % 2 == 0) {
 						r = realx
@@ -30,7 +34,6 @@ function Renderer(element) {
 				}
 
 				sum = sum /itercount
-				var r
 				if (sum > 0){r = 0 } else {r = -sum*500}
 
 				var g = r*2
